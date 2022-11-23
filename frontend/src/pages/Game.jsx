@@ -1,5 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
+
+import useSound from "use-sound";
+import attackSound from "../assets/attack.mp3";
+import waitSound from "../assets/wait.mp3";
+
 import Player from "../components/Player";
 import CharacterContext from "../context/Characters";
 import FightContext from "../context/FightUtils";
@@ -7,6 +12,9 @@ import ImageButton from "../components/ImageButton";
 import picklerick from "../assets/picklerick.png";
 import snowball from "../assets/snowball.png";
 import pistoportal from "../assets/pistoportal.png";
+import snowballAttack from "../assets/snowball_attack.gif";
+import pistoAttack from "../assets/pisto_attack.gif";
+import pickleAttack from "../assets/picklerick_attack.gif";
 
 function Game() {
   const { playerData, enemyData, fetchCharacters, setWinner } =
@@ -22,21 +30,29 @@ function Game() {
     mathRandom,
   } = useContext(FightContext);
   const [ready, setReady] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const [snowballAtt, setSnowballAtt] = useState(false);
+  const [pickleAtt, setPickleAtt] = useState(false);
+  const [pistoAtt, setPistoAtt] = useState(false);
+  const [enemyAtt, setEnemyAtt] = useState(false);
+  const [playAttack] = useSound(attackSound);
+  const [playWait] = useSound(waitSound);
   const navigate = useNavigate();
 
   const randomChar = () => {
     setPlayer({
       ...player,
-      attack: mathRandom(60, 40),
-      defense: mathRandom(40, 20),
+      attack: mathRandom(20, 15),
+      defense: mathRandom(10, 10),
     });
     setEnemy({
       ...enemy,
-      attack: mathRandom(30, 20),
-      defense: mathRandom(10, 5),
+      attack: mathRandom(20, 15),
+      defense: mathRandom(10, 10),
     });
     fetchCharacters();
   };
+
   useEffect(() => {
     if (enemy.life <= 0) {
       setWinner(playerData);
@@ -47,10 +63,49 @@ function Game() {
     }
   }, [player.life, enemy.life]);
 
+  const disableButton = () => {
+    setDisabled(true);
+    setTimeout(() => {
+      setDisabled(false);
+    }, "4500");
+  };
+
+  const playSound = () => {
+    if (disabled) {
+      playWait();
+    } else {
+      playAttack();
+    }
+  };
+
   return (
     <div className="flex flex-row justify-around w-full px-10">
       {playerData ? (
         <>
+          <img
+            className="absolute z-10 animationclass"
+            src={snowballAttack}
+            alt="Snowball Attack"
+            style={{ display: snowballAtt ? "block" : "none" }}
+          />
+          <img
+            className="absolute z-10 animationclass"
+            src={pistoAttack}
+            alt="Pistolet Attack"
+            style={{ display: pistoAtt ? "block" : "none" }}
+          />
+          <img
+            className="absolute z-10 animationclass"
+            src={pickleAttack}
+            alt="Pickle Attack"
+            style={{ display: pickleAtt ? "block" : "none" }}
+          />
+          <img
+            className="absolute z-10 animationclass rotate-180"
+            src={pickleAttack}
+            alt="Pickle Attack"
+            style={{ display: enemyAtt ? "block" : "none" }}
+          />
           <Player
             player={!nickname ? "You" : nickname}
             name={playerData.name}
@@ -61,48 +116,103 @@ function Game() {
           />
           <div className="w-2/5 flex">
             {!ready ? (
-              <div className="flex justify-center items-center  w-full">
-                <button
-                  type="button"
-                  className="random"
-                  onClick={randomChar}
-                  aria-label="random"
-                />
-                <button
-                  className="fight"
-                  type="button"
-                  aria-label="fight"
-                  onClick={() => setReady(true)}
-                />
+              <div className="flex flex-col justify-center items-center align-center w-full">
+                <div className="text-white mb-12 text-4xl font text-green-700">
+                  Choose your card and go fight !!!
+                </div>
+                <div className="flex justify-center items-center">
+                  <button
+                    type="button"
+                    className="random"
+                    onClick={randomChar}
+                    aria-label="random"
+                  />
+                  <button
+                    className="fight"
+                    type="button"
+                    aria-label="fight"
+                    onClick={() => setReady(true)}
+                  />
+                </div>
               </div>
             ) : (
               <div className="flex flex-col w-full">
-                <div className="h-56 mt-5 backdrop-filter backdrop-blur-3xl backdrop-saturate-150 bg-black bg-opacity-40 rounded-lg border border-zinc-800">
-                  <Link
-                    to={`${enemy.life <= 0 ? "/winner" : ""}`}
-                    className="flex flex-row items-center overflow-hidden	justify-center align-center gap-3 h-full"
-                  >
-                    <ImageButton
-                      src={snowball}
-                      alt="Attack One"
-                      onClick={() => turn(1, 1)}
-                    />
-                    <ImageButton
-                      src={pistoportal}
-                      alt="Attack Two"
-                      onClick={() => turn(1.3, 0.8)}
-                    />
-                    <ImageButton
-                      src={picklerick}
-                      alt="Attack Three"
-                      onClick={() => {
-                        turn(1.6, 0.6);
-                      }}
-                    />
-                  </Link>
+                <div className="bg-green-800 border-8 border-double border-green-900 text-white h-56 mt-5 backdrop-filter backdrop-blur-3xl backdrop-saturate-150 bg-black bg-opacity-40 rounded-lg border">
+                  <div className="flex flex-row items-center overflow-hidden justify-center align-center gap-3 h-full">
+                    <button
+                      type="button"
+                      className="w-full flex items-center justify-center gap-3"
+                      onClick={playSound}
+                    >
+                      <ImageButton
+                        src={snowball}
+                        className="w-40 snowball"
+                        alt="Attack One"
+                        disabled={disabled}
+                        onClick={() => {
+                          turn(1, 1);
+                          disableButton();
+                          setSnowballAtt(true);
+                          setTimeout(() => {
+                            setSnowballAtt(false);
+                          }, "1500");
+                          setTimeout(() => {
+                            setEnemyAtt(true);
+                          }, "2500");
+                          setTimeout(() => {
+                            setEnemyAtt(false);
+                          }, "4000");
+                        }}
+                      />
+                      <ImageButton
+                        src={pistoportal}
+                        className="w-40 pisto"
+                        alt="Attack Two"
+                        disabled={disabled}
+                        onClick={() => {
+                          turn(1.4, 0.8);
+                          disableButton();
+                          setPistoAtt(true);
+                          setTimeout(() => {
+                            setPistoAtt(false);
+                          }, "1500");
+                          setTimeout(() => {
+                            setEnemyAtt(true);
+                          }, "2500");
+                          setTimeout(() => {
+                            setEnemyAtt(false);
+                          }, "4000");
+                        }}
+                      />
+                      <ImageButton
+                        src={picklerick}
+                        className="w-40 pickle"
+                        alt="Attack Three"
+                        disabled={disabled}
+                        onClick={() => {
+                          turn(1.8, 0.6);
+                          disableButton();
+                          setPickleAtt(true);
+                          setTimeout(() => {
+                            setPickleAtt(false);
+                          }, "1500");
+                          setTimeout(() => {
+                            setEnemyAtt(true);
+                          }, "2500");
+                          setTimeout(() => {
+                            setEnemyAtt(false);
+                          }, "4000");
+                        }}
+                      />
+                    </button>
+                  </div>
+                  <span
+                    className="loader after:bg-green-800"
+                    style={{ display: disabled ? "block" : "none" }}
+                  />
                 </div>
 
-                <div className="mt-5 p-2 text-center overflow-auto list min-h-20 flex flex-col-reverse backdrop-filter backdrop-blur-3xl backdrop-saturate-150 bg-black bg-opacity-40 rounded-lg border border-zinc-800">
+                <div className="mt-5 bg-green-800 border-8 border-double border-green-900 text-white p-2 text-center overflow-auto list min-h-20 flex flex-col-reverse backdrop-filter backdrop-blur-3xl backdrop-saturate-150 bg-black bg-opacity-40 rounded-lg border ">
                   {history.length === 0 ? (
                     <h2 className="">Choose your attack</h2>
                   ) : (

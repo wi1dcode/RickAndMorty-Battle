@@ -8,8 +8,8 @@ export function FightUtils({ children }) {
   const [enemy, setEnemy] = useState({});
   const [player, setPlayer] = useState({});
 
-  const mathRandom = (max, min) => {
-    const A = Math.floor(Math.random() * (max - min) + 5);
+  const mathRandom = (range, minValue) => {
+    const A = Math.floor(Math.random() * range + minValue);
     if (A > 0) {
       return A;
     }
@@ -19,14 +19,14 @@ export function FightUtils({ children }) {
     setPlayer({
       ...player,
       life: 100,
-      attack: mathRandom(60, 40),
-      defense: mathRandom(40, 20),
+      attack: mathRandom(20, 15),
+      defense: mathRandom(10, 10),
     });
     setEnemy({
       ...enemy,
       life: 100,
-      attack: mathRandom(30, 20),
-      defense: mathRandom(10, 5),
+      attack: mathRandom(20, 15),
+      defense: mathRandom(10, 10),
     });
   }, []);
 
@@ -54,13 +54,13 @@ export function FightUtils({ children }) {
       setHistory((prev) => [
         ...prev,
         `${
-          !nickname ? "You" : nickname
-        } did ${turnDamageDoneToEnemy} damage to Enemy`,
+          !nickname ? "👤🟢 You" : `👤🟢 ${nickname}`
+        } did ${turnDamageDoneToEnemy} 💥 damage to Enemy`,
       ]);
     } else
       setHistory((prev) => [
         ...prev,
-        `${!nickname ? "You" : nickname} failed to attack!`,
+        `${!nickname ? "👤❌ You" : `👤❌ ${nickname}`} failed to attack!`,
       ]);
   };
 
@@ -80,13 +80,13 @@ export function FightUtils({ children }) {
         setPlayer({ ...player, life: lifePlayerAfterEnemyAttack });
         setHistory((prev) => [
           ...prev,
-          `Enemy did ${turnDamageDoneToPlayer} damage to ${
+          `👾🔴 Enemy did ${turnDamageDoneToPlayer} 🔥 damage to ${
             !nickname ? "You" : nickname
           }`,
         ]);
-      } else setHistory((prev) => [...prev, `Enemy failed his attack!`]);
+      } else setHistory((prev) => [...prev, `👾❌ Enemy failed his attack!`]);
     };
-    if (player.life > 0) setTimeout(delayedAttack, 2000);
+    if (player.life > 0) setTimeout(delayedAttack, 2500);
   };
 
   const turn = (multiplierPlayer, chancePlayer) => {
@@ -97,10 +97,10 @@ export function FightUtils({ children }) {
       enemyFight(1, 1); // Set chance and multiplier
     } else if (choseEnemySpell < 0.66) {
       // Make animation of spell 2
-      enemyFight(1.5, 0.75);
+      enemyFight(1.4, 0.8);
     } else {
       // Make animation of spell 3
-      enemyFight(2, 0.5);
+      enemyFight(1.8, 0.6);
     }
   };
 
