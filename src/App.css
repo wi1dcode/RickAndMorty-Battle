@@ -16,7 +16,7 @@ html {
 /* PAGE START  */
 
 .animate-spin {
-  animation: spin 5s linear infinite;
+  animation: spinPortal 8s linear infinite;
 }
 
 h1,
@@ -199,7 +199,7 @@ h1,
   line-height: 35px;
 }
 
-@keyframes spin {
+@keyframes spinPortal {
   from {
     transform: rotate(0deg);
   }
@@ -227,7 +227,7 @@ h1,
   z-index: 1;
   margin-top: -200vh;
   margin-left: -200vw;
-  animation: spin 0.5s linear infinite;
+  animation: spin 240s linear infinite;
   background-size: 240px;
   backface-visibility: visible;
   background-color: #1e234d;
