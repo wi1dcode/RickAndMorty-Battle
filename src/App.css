@@ -15,15 +15,6 @@ html {
 
 /* PAGE START  */
 
-button:not(.x-class, .y-class, .z-class),
-[type='button']:not(.x-class, .y-class, .z-class),
-[type='reset']:not(.x-class, .y-class, .z-class),
-[type='submit']:not(.x-class, .y-class, .z-class) {
-  -webkit-appearance: button; 
-  background-color: transparent; 
-  background-image: black; 
-}
-
 .animate-spinx {
   animation: spinPortal 8s linear infinite;
 }
