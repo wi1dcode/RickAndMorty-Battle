@@ -15,9 +15,13 @@ html {
 
 /* PAGE START  */
 
-[type=button], [type=reset], [type=submit], button {
-  background-color: transparent;
-  background-image: black;
+button:not(.x-class, .y-class, .z-class),
+[type='button']:not(.x-class, .y-class, .z-class),
+[type='reset']:not(.x-class, .y-class, .z-class),
+[type='submit']:not(.x-class, .y-class, .z-class) {
+  -webkit-appearance: button; 
+  background-color: transparent; 
+  background-image: black; 
 }
 
 .animate-spinx {
