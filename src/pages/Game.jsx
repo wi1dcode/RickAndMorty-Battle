@@ -123,12 +123,12 @@ function Game() {
                 <div className="flex justify-center items-center">
                   <button
                     type="button"
-                    className="random"
+                    className="random bg-black"
                     onClick={randomChar}
                     aria-label="random"
                   />
                   <button
-                    className="fight bg-[url('./assets/fight_btn.png')]"
+                    className="fight bg-black"
                     type="button"
                     aria-label="fight"
                     onClick={() => setReady(true)}
