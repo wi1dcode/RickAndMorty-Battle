@@ -128,7 +128,7 @@ function Game() {
                     aria-label="random"
                   />
                   <button
-                    className="fight bg-[url('../assets/fight_btn.png')]"
+                    className="fight bg-[url('./assets/fight_btn.png')]"
                     type="button"
                     aria-label="fight"
                     onClick={() => setReady(true)}
