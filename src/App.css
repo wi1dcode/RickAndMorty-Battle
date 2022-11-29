@@ -16,8 +16,8 @@ html {
 /* PAGE START  */
 
 [type=button], [type=reset], [type=submit], button {
-  background-color: initial;
-  background-image: initial;
+  background-color: transparent;
+  background-image: black;
 }
 
 .animate-spinx {
