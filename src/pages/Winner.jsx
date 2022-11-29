@@ -3,6 +3,8 @@ import { useContext } from "react";
 import CharactersContext from "../context/Characters";
 import WinnerCard from "../components/WinnerCard";
 
+import replayButton from "../assets/replay"
+
 function Winner() {
   const { winner } = useContext(CharactersContext);
 
@@ -11,7 +13,7 @@ function Winner() {
       <div className="uppercase text-5xl my-4">winner:</div>
       {winner ? <WinnerCard name={winner.name} image={winner.image} /> : ""}
       <Link to="/">
-        <button type="button" className="replay" aria-label="replay" />
+        <button type="button" className={`replay bg-[url(${replayButton})]`} aria-label="replay" />
       </Link>
     </div>
   );
