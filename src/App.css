@@ -15,7 +15,7 @@ html {
 
 /* PAGE START  */
 
-.animate-spin {
+.animate-spinx {
   animation: spinPortal 8s linear infinite;
 }
 

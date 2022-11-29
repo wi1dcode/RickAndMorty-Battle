@@ -73,7 +73,7 @@ function Start() {
               start
             </button>
           </Link>
-          <img src={portal} alt="portal" className="w-[80%] animate-spin" />
+          <img src={portal} alt="portal" className="w-[80%] animate-spinx" />
         </div>
 
         <div
