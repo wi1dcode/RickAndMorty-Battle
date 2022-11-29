@@ -15,6 +15,11 @@ html {
 
 /* PAGE START  */
 
+[type=button], [type=reset], [type=submit], button {
+  background-color: initial;
+  background-image: initial;
+}
+
 .animate-spinx {
   animation: spinPortal 8s linear infinite;
 }
