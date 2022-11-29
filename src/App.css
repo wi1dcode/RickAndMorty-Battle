@@ -76,6 +76,7 @@ h1,
   background-color: transparent;
   background-image: url(./assets/random-arrow.png);
   cursor: pointer;
+  opacity: 1;
 }
 .random:hover {
   filter: drop-shadow(0 0 0.75rem green);
@@ -94,6 +95,7 @@ h1,
   background-color: transparent;
   background-image: url(./assets/fight_button.png);
   cursor: pointer;
+  opacity: 1;
 }
 .fight:hover {
   filter: drop-shadow(0 0 0.75rem yellow);
@@ -138,6 +140,7 @@ h1,
   background-color: transparent;
   background-image: url(./assets/get_home_button.png);
   cursor: pointer;
+  opacity: 1;
 }
 .home:hover {
   filter: drop-shadow(0 0 0.75rem yellow);
