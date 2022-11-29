@@ -6,6 +6,7 @@ import Victor from "../assets/crew_victor.gif";
 import Kevin from "../assets/crew_kevin.gif";
 import Magomed from "../assets/crew_mago.gif";
 import Cedric from "../assets/crew_cedric.gif";
+import homeButton from "../assets/get_home_button.png";
 
 const crewMate = [
   {
@@ -53,7 +54,7 @@ function Credits() {
       </div>
       <div className="flex flex-col items-center justify-center">
         <Link to="/">
-          <button type="button" className="home" aria-label="home" />
+          <button type="button" className={`home bg-[url(${homeButton})]`} aria-label="home" />
         </Link>
       </div>
     </div>
