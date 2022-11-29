@@ -15,6 +15,8 @@ import pistoportal from "../assets/pistoportal.png";
 import snowballAttack from "../assets/snowball_attack.gif";
 import pistoAttack from "../assets/pisto_attack.gif";
 import pickleAttack from "../assets/picklerick_attack.gif";
+import fightButton from "../assets/fight_btn.png"
+import randomButton from "../assets/random_btn.png"
 
 function Game() {
   const { playerData, enemyData, fetchCharacters, setWinner } =
@@ -123,12 +125,12 @@ function Game() {
                 <div className="flex justify-center items-center">
                   <button
                     type="button"
-                    className="random bg-black"
+                    className={`random bg-[url(${randomButton})]`}
                     onClick={randomChar}
                     aria-label="random"
                   />
                   <button
-                    className="fight bg-black"
+                    className={`fight bg-[url(${fightButton})]`}
                     type="button"
                     aria-label="fight"
                     onClick={() => setReady(true)}
