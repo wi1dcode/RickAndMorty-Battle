@@ -1,4 +1,5 @@
 import React from "react";
+import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ReactNotifications } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
@@ -15,7 +16,6 @@ import Credits from "./pages/Credits";
 import { Characters } from "./context/Characters";
 import { FightUtils } from "./context/FightUtils";
 
-import "./App.css";
 
 function App() {
   return (
