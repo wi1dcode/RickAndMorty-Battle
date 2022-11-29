@@ -3,7 +3,7 @@ import { useContext } from "react";
 import CharactersContext from "../context/Characters";
 import WinnerCard from "../components/WinnerCard";
 
-import replayButton from "../assets/replay"
+import replayButton from "../assets/replay.png"
 
 function Winner() {
   const { winner } = useContext(CharactersContext);
