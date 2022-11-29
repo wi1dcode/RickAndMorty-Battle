@@ -74,7 +74,7 @@ h1,
   background-repeat: no-repeat;
   border-style: none;
   background-color: transparent;
-  background-image: url(./assets/random-arrow.png);
+  background-image: url(./assets/random_btn.png);
   cursor: pointer;
 }
 .random:hover {
@@ -92,7 +92,7 @@ h1,
   background-repeat: no-repeat;
   border-style: none;
   background-color: transparent;
-  background-image: url(./assets/fight_button.png);
+  background-image: url(./assets/fight_btn.png);
   cursor: pointer;
 }
 .fight:hover {
